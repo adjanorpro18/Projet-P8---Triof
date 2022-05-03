@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Triof</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../static/css/main.css" />
+		<noscript><link rel="stylesheet" href="../static/css/noscript.css" /></noscript>
+
+        <style>
+            #wrapper:before{
+                content: normal;
+            }
+        </style>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<section id="main">
+
+						<p >Your rubbish looks like {{prediction}}</p>
+
+
+						<header>														
+							<p>Please select the type of waste </p>
+							<!-- <img  width= 150 src={{picture}}>-->
+						</header>
+
+						
+
+						<form method="post" action="/confirmation">
+							<div class="fields">
+
+
+								<div class="field">
+
+									{% if prediction[0] == "bouteille"%}
+
+                                  <input
+                                      type="radio"
+                                      name="type"
+                                      id="bouteille"
+                                      value="bouteille"
+									  checked>
+									  
+									  {% else %}
+
+                                  <input
+                                      type="radio"
+                                      name="type"
+                                      id="bouteille"
+                                      value="bouteille">
+									  {% endif %}
+
+								<label for="bouteille">Bouteille en plastique</label>
+
+
+									{% if prediction[0] == 'gobelet'%}
+
+                                  <input
+                                      type="radio"
+                                      name="type"
+                                      id="gobelet"
+                                      value="gobelet"
+									  checked>
+									  
+									  {% else %}
+
+                                  <input
+                                      type="radio"
+                                      name="type"
+                                      id="gobelet"
+                                      value="gobelet">
+									  {% endif %}
+                                  
+                                  <label for="gobelet">Gobelet en plastique</label>
+
+
+
+								  {% if prediction[0] == 'couvert'%}
+
+                                  <input
+                                      type="radio"
+                                      name="type"
+                                      id="couvert"
+                                      value="couvert"
+									  checked>
+									  
+									  {% else %}
+
+                                  <input
+                                      type="radio"
+                                      name="type"
+                                      id="couvert"
+                                      value="couvert">
+									  {% endif %}
+                                  <label for="couvert">Couverts en plastique</label>
+
+								
+								</div>
+
+
+                                <div class="field">
+                                    <input type="submit" value="confirm"/>
+                                </div>
+							</div>
+
+						</form>
+
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script>
+				if ('addEventListener' in window) {
+					window.addEventListener('load', function() { document.body.className = document.body.className.replace(/\bis-preload\b/, ''); });
+					document.body.className += (navigator.userAgent.match(/(MSIE|rv:11\.0)/) ? ' is-ie' : '');
+				}
+			</script>
+
+	</body>
+</html>
