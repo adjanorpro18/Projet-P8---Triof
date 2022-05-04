@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request
 from src.utils import *
 from base64 import b64encode
-import numpy as np
+from PIL import Image
 from io import BytesIO
+
 
 app = Flask(__name__)
 
@@ -42,7 +43,15 @@ def pick_type():
 
     pred = predictions(img)
 
-    return render_template('type.html', prediction= pred)
+
+    # img = str(request.form['path_return'])
+
+    res = clean_or_dirty(img)
+    if res == 'Item is clean':
+            return render_template('type.html', prediction= pred, res=res)
+
+    else:
+        return render_template('dirty.html')
 
     
     
@@ -63,6 +72,17 @@ def confirmation():
 
     process_waste(waste_type)
     return render_template('confirmation.html')
+
+    
+    
+
+    # picture, path_return = take_trash_picture()
+    # PIL_image = Image.fromarray(np.uint8(picture)).convert('RGB')
+    # data = BytesIO()
+    # img_show = PIL_image.save(data, "JPEG")
+    # pred = predictions(img)
+    # print(pred)
+   
 
 
 

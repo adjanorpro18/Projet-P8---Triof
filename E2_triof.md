@@ -47,7 +47,7 @@ Une fois cette partie terminée, vous devez avoir une vision nette du fonctionne
 
 ## 2ème partie : une solution IA Cloud
 
-# Élaboration, construction et intégration d'une solution utilisant Custom Vision de Azure Cognitive Services afin d'améliorer la classification des déchets de la machine Triof. Tout est dit ;)
+Élaboration, construction et intégration d'une solution utilisant Custom Vision de Azure Cognitive Services afin d'améliorer la classification des déchets de la machine Triof. Tout est dit ;)
 
 #### Gestion de projet Agile
 

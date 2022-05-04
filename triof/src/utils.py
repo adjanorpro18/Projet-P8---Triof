@@ -4,6 +4,10 @@ import random
 from isort import file
 from matplotlib.image import imread
 from PIL import Image
+import numpy as np
+from base64 import b64encode
+from io import BytesIO
+
 
 # pour langestion de l'API custum vision
 
@@ -105,6 +109,12 @@ def take_trash_picture():
 
     return (imread(os.path.join("/Users/enyonadjanor/IA-P2-Euskadi-Enyon/Projets/Projet P8 - Triof/triof/camera", path)),path_return)
 
+picture, path_return = take_trash_picture()
+PIL_image = Image.fromarray(np.uint8(picture)).convert('RGB')
+data = BytesIO()
+PIL_image.save(data, "JPEG")
+data64 = b64encode(data.getvalue())
+PIL_image = u'data:img/jpeg;base64,'+data64.decode('utf-8')
 
 def predictions(img):
 
@@ -138,3 +148,31 @@ def predictions(img):
         # result = tag_image  + ":{0: .2f}%".format(proba_predict*100)
 
     return tag_image, proba_predict
+
+
+from keras.models import load_model
+from keras import preprocessing
+
+def clean_or_dirty(img):
+    #load the saved model
+    classifier = load_model("/Users/enyonadjanor/IA-P2-Euskadi-Enyon/Projets/Projet P8 - Triof/triof/model_tl")
+    path = "/Users/enyonadjanor/IA-P2-Euskadi-Enyon/Projets/Projet P8 - Triof/triof/camera"
+    #prediction
+    image_address = os.path.join (path, img)
+    img = preprocessing.image.load_img(image_address,target_size=(64,64))
+    img = np.asarray(img)
+    img = np.expand_dims(img, axis=0)
+
+    # make prediction
+
+    #making prediction for output 
+
+    output = classifier.predict(img)
+
+    #returning prediction
+    res = ""
+    if output <= 0.5:
+        res = 'Item is clean'
+    else:
+        res = 'Item is dirty'
+    return res
