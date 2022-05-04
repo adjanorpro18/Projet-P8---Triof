@@ -167,7 +167,9 @@ def clean_or_dirty(img):
 
     #making prediction for output 
 
-    output = classifier.predict(img)
+    output = classifier.predict(img)[0][0]
+
+    print(output)
 
     #returning prediction
     res = ""
